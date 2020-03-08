@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "95074918440",
+    "firebase_url": "https://concejales-project.firebaseio.com",
+    "project_id": "concejales-project",
+    "storage_bucket": "concejales-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95074918440:android:a3dcd5034dfdcb72f8d51d",
+        "android_client_info": {
+          "package_name": "com.brocolisoftware.concejales_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95074918440-e2ec7qidlf2o0lgk33n51b1mvukq26a4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brocolisoftware.concejales_project",
+            "certificate_hash": "204fe3c7870a9eea0adb3ad060ee6ff9e1fce8d4"
+          }
+        },
+        {
+          "client_id": "95074918440-4o940mdjfe3sl8f9u84t1mcapdj3e296.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6UHR_whNWw8HUbOddYRrYhPmm6zqtq1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95074918440-4o940mdjfe3sl8f9u84t1mcapdj3e296.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

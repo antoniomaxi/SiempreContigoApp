@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">concejales-project</string>
+    <string name="Email">Email</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Apellido">Apellido</string>
+    <string name="Cedula">Cédula</string>
+    <string name="password">Contraseña</string>
+    <string name="telefono">Telefono</string>
+    <string name="Direccion">Dirección</string>
+    <string name="Edad">Edad</string>
+    <string name="password2">Repita su Contraseña</string>
+    <string name="Login">Iniciar Sesión</string>
+    <string name="Sign_Up">Registrate</string>
+    <string name="facebook_application_id" translatable="false">1012634309130092</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1012634309130092</string>
+</resources>
