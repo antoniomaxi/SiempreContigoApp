@@ -20,6 +20,7 @@ class DashboardActivity : AppCompatActivity() {
         Emergencia.setOnClickListener {
             val intent = Intent(this, LatestMessageActivity::class.java)
             startActivity(intent)
+
         }
         Logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
