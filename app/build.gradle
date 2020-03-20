@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.gms.google-services' //Firebase
 
+androidExtensions{
+    experimental = true
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -52,8 +56,19 @@ dependencies {
     //Progress Dialog
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
+    //CircleImageView
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     //Facebook
     implementation 'com.facebook.android:facebook-login:[5,6)'
+
+    //Groupie
+    implementation "com.xwray:groupie:2.7.0"
+    implementation "com.xwray:groupie-kotlin-android-extensions:2.7.0"
+    implementation "com.xwray:groupie-databinding:2.7.0"
 
     //MultiDex
     implementation "androidx.multidex:multidex:2.0.1"
@@ -61,4 +76,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

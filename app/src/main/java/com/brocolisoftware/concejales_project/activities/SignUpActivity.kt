@@ -1,10 +1,13 @@
 package com.brocolisoftware.concejales_project.activities
 
-import android.R.attr.name
-import android.R.attr.password
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,9 +16,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toDrawable
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.entities.User
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -23,10 +26,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -65,6 +68,16 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun registerUser(){
+
+        if(photo == null){
+            Toast.makeText(
+                this,
+                "Por Favor Seleccione una Imagen",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
         if(ed_Nombre.text.toString().trim().isEmpty()){
             ed_Nombre.error = "Nombre Requerido"
             ed_Nombre.requestFocus()
@@ -133,40 +146,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
 
-                    var uid = mAuth.uid
-                    val user = User(
-                        uid!!,
-                        ed_Nombre.text.toString().trim(),
-                        ed_Apellido.text.toString().trim(),
-                        ed_Email.text.toString().trim(),
-                        ed_Direccion.text.toString().trim(),
-                        ed_Phone.text.toString().trim(),
-                        ed_Cedula.text.toString().trim()
-                    )
-
-                    //subirFoto()
-
-                    database = FirebaseDatabase.getInstance().getReference("/Usuarios/$uid")
-                    database.setValue(user)
-                        .addOnSuccessListener {
-                            dialog!!.dismiss()
-                            mAuth.signOut()
-                            Toast.makeText(
-                                this,
-                                "Registro Exitoso",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            finish()
-                        }
-                        .addOnFailureListener {
-                            mAuth.signOut()
-                            dialog!!.dismiss()
-                            Toast.makeText(
-                                this,
-                                task.exception?.message,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
+                    subirFoto(dialog,task)
 
                 } else {
                     dialog!!.dismiss()
@@ -202,9 +182,9 @@ class SignUpActivity : AppCompatActivity() {
             registerUser()
         }
 
-        /*btn_select_photo.setOnClickListener {
+        btn_select_photo.setOnClickListener {
             seleccionarFoto()
-        }*/
+        }
     }
 
     private fun seleccionarFoto() {
@@ -214,25 +194,90 @@ class SignUpActivity : AppCompatActivity() {
         startActivityForResult(intent,0)
     }
 
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
             photo = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,photo)
 
-            val bitmapDrawable = BitmapDrawable(this.resources, bitmap)
-            btn_select_photo.background = bitmapDrawable
+            val picasso = Picasso.get()
+
+            picasso.load(photo).into(btn_select_photo)
+
+
+
+            //btn_select_photo.setImageBi|tmap(bitmap)
+
+            /*val bitmapDrawable = BitmapDrawable(this.resources, bitmap)
+            btn_select_photo.background = bitmapDrawable*/
 
         }
-    }*/
+    }
 
-    /*fun subirFoto(){
+    fun subirFoto(dialog: AlertDialog?, task: Task<AuthResult>) {
         if(photo == null) return
 
         val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        val ref = FirebaseStorage.getInstance().getReference("/userPhotos/$filename")
 
         ref.putFile(photo!!)
-    }*/
+            .addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener {
+                     salvarUsuarioEnFirebase(it.toString(),dialog,task)
+                }
+            }
+            .addOnFailureListener {
+                mAuth.signOut()
+                dialog!!.dismiss()
+                Toast.makeText(
+                    this,
+                    "Usuario NO Registrado",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+    }
+
+    private fun salvarUsuarioEnFirebase(photoUrl: String, dialog: AlertDialog?, task: Task<AuthResult>) {
+
+        var uid = mAuth.uid
+        val user = User(
+            uid!!,
+            ed_Nombre.text.toString().trim(),
+            ed_Apellido.text.toString().trim(),
+            ed_Email.text.toString().trim(),
+            ed_Direccion.text.toString().trim(),
+            ed_Phone.text.toString().trim(),
+            ed_Cedula.text.toString().trim(),
+            false,
+            photoUrl
+        )
+
+        database = FirebaseDatabase.getInstance().getReference("/Usuarios/$uid")
+        database.setValue(user)
+            .addOnSuccessListener {
+
+                dialog!!.dismiss()
+                mAuth.signOut()
+                Toast.makeText(
+                    this,
+                    "Registro Exitoso",
+                    Toast.LENGTH_LONG
+                ).show()
+                finish()
+            }
+            .addOnFailureListener {
+                mAuth.signOut()
+                dialog!!.dismiss()
+                Toast.makeText(
+                    this,
+                    task.exception?.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+    }
+
 }
+
+

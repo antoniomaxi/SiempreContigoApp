@@ -114,7 +114,6 @@ class LoginActivity : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
 
-
                 if (task.isSuccessful) {
                     dialog!!.dismiss()
                     onAuthSuccess(task.result?.user!!)
