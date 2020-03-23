@@ -14,5 +14,13 @@
             android:elevation="4dp"
             app:navigationIcon="@drawable/ic_arrow_back" />
 
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerview_latest_message"
+            android:orientation="vertical">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 
 </LinearLayout>

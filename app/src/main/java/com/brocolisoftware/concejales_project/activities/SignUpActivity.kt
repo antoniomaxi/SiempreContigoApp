@@ -3,20 +3,13 @@ package com.brocolisoftware.concejales_project.activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.graphics.drawable.BitmapDrawable
-import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toDrawable
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.entities.User
 import com.google.android.gms.tasks.Task
@@ -27,8 +20,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.lang.Exception
+import java.security.AccessController.getContext
 import java.util.*
 
 
@@ -188,31 +185,22 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun seleccionarFoto() {
-
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent,0)
+        CropImage.activity()
+            .setGuidelines(CropImageView.Guidelines.ON)
+            .start(this);
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-            photo = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,photo)
-
-            val picasso = Picasso.get()
-
-            picasso.load(photo).into(btn_select_photo)
-
-
-
-            //btn_select_photo.setImageBi|tmap(bitmap)
-
-            /*val bitmapDrawable = BitmapDrawable(this.resources, bitmap)
-            btn_select_photo.background = bitmapDrawable*/
-
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            photo = CropImage.getActivityResult(data).uri
+            loadImage(photo)
         }
+    }
+
+    private fun loadImage(uriPhoto: Uri?) {
+        Picasso.get().load(uriPhoto).into(btn_select_photo)
     }
 
     fun subirFoto(dialog: AlertDialog?, task: Task<AuthResult>) {

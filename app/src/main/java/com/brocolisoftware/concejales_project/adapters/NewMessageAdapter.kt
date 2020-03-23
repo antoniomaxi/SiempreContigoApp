@@ -9,9 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.activities.ChatActivity
+import com.brocolisoftware.concejales_project.activities.LatestMessageActivity.Companion.USER_KEY
 import com.brocolisoftware.concejales_project.entities.User
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.item_new_message.view.*
 import java.util.*
 
@@ -41,6 +43,7 @@ class NewMessageAdapter (val lista: ArrayList<User>) : RecyclerView.Adapter<NewM
         if (lista[position] != null) {
             if (holder!!.tv_username != null) {
                 holder.tv_username.text = lista[position].nombre.toUpperCase() + " " + lista[position].apellido.toUpperCase()
+
                 Picasso.get().load(lista[position].foto).resize(400,400).into(holder.image)
             }
         }
@@ -50,9 +53,7 @@ class NewMessageAdapter (val lista: ArrayList<User>) : RecyclerView.Adapter<NewM
         var tv_username = itemView.username_new_message as TextView
         var image = itemView.btn_select_photo as CircularImageView
 
-        companion object{
-            val USER_KEY = "USER_KEY"
-        }
+
 
         init {
             itemView.setOnClickListener {

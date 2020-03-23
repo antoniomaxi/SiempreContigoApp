@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:orientation="vertical"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="2dp"
         app:ignore="NamespaceTypo">
 
     <LinearLayout
@@ -33,12 +33,13 @@
                 android:id="@+id/new_message_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
                 android:padding="10dp"
-                android:maxWidth="240dp"
+                android:maxWidth="260dp"
                 android:background="@drawable/background_textviews_login"
                 android:textColor="@android:color/black"
-                android:textSize="14dp"
+                android:textSize="16dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/username"/>
 
 

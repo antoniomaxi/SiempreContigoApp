@@ -70,6 +70,9 @@ dependencies {
     implementation "com.xwray:groupie-kotlin-android-extensions:2.7.0"
     implementation "com.xwray:groupie-databinding:2.7.0"
 
+    //PickPhoto
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
     //MultiDex
     implementation "androidx.multidex:multidex:2.0.1"
 

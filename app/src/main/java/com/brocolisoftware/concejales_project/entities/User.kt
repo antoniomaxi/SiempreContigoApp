@@ -1,7 +1,6 @@
 package com.brocolisoftware.concejales_project.entities
 
 import android.os.Parcelable
-import com.google.firebase.database.Exclude
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

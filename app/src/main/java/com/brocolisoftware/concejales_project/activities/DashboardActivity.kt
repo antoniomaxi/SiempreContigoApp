@@ -29,7 +29,7 @@ class DashboardActivity : AppCompatActivity() {
         inicializarListeneres()
     }
 
-    private fun traerCurrentUser() {
+     private fun traerCurrentUser() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         val ref = FirebaseDatabase.getInstance().getReference("/Usuarios/$uid")
 
