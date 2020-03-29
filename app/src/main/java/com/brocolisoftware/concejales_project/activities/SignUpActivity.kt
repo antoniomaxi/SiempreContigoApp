@@ -3,8 +3,10 @@ package com.brocolisoftware.concejales_project.activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
@@ -24,6 +26,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 import java.security.AccessController.getContext
 import java.util.*
@@ -43,7 +46,7 @@ class SignUpActivity : AppCompatActivity() {
     private var photo : Uri? = null
 
     //Firebase
-    private lateinit var mAuth : FirebaseAuth;
+    private lateinit var mAuth : FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var storage: StorageReference
 
@@ -125,8 +128,8 @@ class SignUpActivity : AppCompatActivity() {
 
         if (!Patterns.EMAIL_ADDRESS.matcher(ed_Email.text.toString().trim()).matches()) {
             ed_Email.error = "Email con formato incorrecto"
-            ed_Email.requestFocus();
-            return;
+            ed_Email.requestFocus()
+            return
         }
 
         val dialog: android.app.AlertDialog? = SpotsDialog.Builder()
@@ -187,7 +190,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun seleccionarFoto() {
         CropImage.activity()
             .setGuidelines(CropImageView.Guidelines.ON)
-            .start(this);
+            .start(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -209,7 +212,12 @@ class SignUpActivity : AppCompatActivity() {
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/userPhotos/$filename")
 
-        ref.putFile(photo!!)
+         val bmp : Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, photo)
+                    val baos  =  ByteArrayOutputStream()
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos)
+                    val data = baos.toByteArray()
+
+        ref.putBytes(data)
             .addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
                      salvarUsuarioEnFirebase(it.toString(),dialog,task)
@@ -228,7 +236,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun salvarUsuarioEnFirebase(photoUrl: String, dialog: AlertDialog?, task: Task<AuthResult>) {
 
-        var uid = mAuth.uid
+        val deviceToken = ""
+
+        val uid = mAuth.uid
         val user = User(
             uid!!,
             ed_Nombre.text.toString().trim(),
@@ -238,7 +248,8 @@ class SignUpActivity : AppCompatActivity() {
             ed_Phone.text.toString().trim(),
             ed_Cedula.text.toString().trim(),
             false,
-            photoUrl
+            photoUrl,
+            deviceToken
         )
 
         database = FirebaseDatabase.getInstance().getReference("/Usuarios/$uid")

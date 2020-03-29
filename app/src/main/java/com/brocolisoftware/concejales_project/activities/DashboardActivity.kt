@@ -3,13 +3,16 @@ package com.brocolisoftware.concejales_project.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.entities.User
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class DashboardActivity : AppCompatActivity() {
@@ -52,7 +55,26 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
+        }else{
+            FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        return@OnCompleteListener
+                    }
+
+                    // Get new Instance ID token
+                    val token = task.result?.token
+
+                    FirebaseDatabase.getInstance().getReference("/Usuarios/$uid/device_id")
+                        .setValue(token).addOnSuccessListener {
+                            Toast.makeText(baseContext, "Bienvenido", Toast.LENGTH_SHORT).show()
+                        }
+
+                })
+
+
         }
+
     }
 
     private fun inicializarListeneres() {

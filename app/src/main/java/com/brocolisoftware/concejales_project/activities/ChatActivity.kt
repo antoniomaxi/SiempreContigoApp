@@ -1,16 +1,19 @@
 package com.brocolisoftware.concejales_project.activities
 
+import android.app.Notification
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brocolisoftware.concejales_project.R
+import com.brocolisoftware.concejales_project.activities.DashboardActivity.Companion.currentUser
 import com.brocolisoftware.concejales_project.activities.LatestMessageActivity.Companion.USER_KEY
 import com.brocolisoftware.concejales_project.adapters.NewMessageAdapter
 import com.brocolisoftware.concejales_project.adapters.Chat
@@ -28,6 +31,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     lateinit var user : User
     val adapter = GroupAdapter<GroupieViewHolder>()
+    lateinit var Notification : Notification
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,17 +88,20 @@ class ChatActivity : AppCompatActivity() {
 
                     if (message.fromId == FirebaseAuth.getInstance().currentUser?.uid){
                         var currentUser = DashboardActivity.currentUser
-                        if (currentUser != null)
+                        if (currentUser != null){
                             adapter.add(Chat.ChatToItem(message.text, currentUser))
+                        }
                         else{
                             traerCurrentUser()
                             currentUser = DashboardActivity.currentUser ?: return
                             adapter.add(Chat.ChatToItem(message.text, currentUser))
                         }
-
                     }
-                    else
+                    else{
                         adapter.add(Chat.ChatFromItem(message.text, user))
+                    }
+
+
 
                 }
 
@@ -149,9 +156,24 @@ class ChatActivity : AppCompatActivity() {
         ref.setValue(message).addOnSuccessListener {
 
             recyclerView.scrollToPosition(adapter.itemCount -1)
+
+
+            FirebaseDatabase.getInstance().getReference("/Notifications/$toId")
+                .push().setValue(message).addOnSuccessListener {
+                }
+
+
+            et_message.text.clear()
+            toRef.setValue(message)
+
+        }.addOnFailureListener {
+            Toast.makeText(
+                this,
+                "MENSAJE NO ENVIADO POR "+it.message.toString(),
+                Toast.LENGTH_LONG
+            ).show()
         }
-        et_message.text.clear()
-        toRef.setValue(message)
+
 
         val refLatest = FirebaseDatabase.getInstance().getReference("/ultimosMensajes/$fromId").push()
         refLatest.setValue(message)

@@ -13,4 +13,5 @@
     <string name="Sign_Up">Registrate</string>
     <string name="new_message">Nuevo Mensaje</string>
     <string name="username">"Usuario "</string>
+    <string name="default_notification_channel_id">1</string>
 </resources>
