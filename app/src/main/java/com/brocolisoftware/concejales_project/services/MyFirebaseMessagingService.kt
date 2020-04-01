@@ -42,29 +42,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun sendNotification(messageBody: JSONObject, title: String) {
 
-/*
-
-        var user = messageBody.getJSONObject("user")
-        var message = messageBody.getJSONObject("message")
-
-        Notify
-            .with(this)
-            .meta {
-                icon|
-            }
-            .asMessage {
-                userDisplayName = "Usuario"
-                conversationTitle = title
-                messages = Arrays.asList(
-                    NotificationCompat.MessagingStyle.Message(messageBody.getJSONObject("message").getString("text"),
-                        System.currentTimeMillis() - message.getLong("timestamp"), // 6 Mins ago
-                        user.getString("nombre") + " " + user.getString("apellido"))
-                )
-                conversationTitle = "Siempre Contigo"
-            }
-            .show()
-*/
-
         val user = messageBody.getJSONObject("user")
         val message = messageBody.getJSONObject("message")
 
@@ -116,6 +93,30 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         notificationManager.notify(0, builder.build())
+
+        /* NOTIFY LIBRARY
+
+        var user = messageBody.getJSONObject("user")
+        var message = messageBody.getJSONObject("message")
+
+        Notify
+            .with(this)
+            .meta {
+                icon|
+            }
+            .asMessage {
+                userDisplayName = "Usuario"
+                conversationTitle = title
+                messages = Arrays.asList(
+                    NotificationCompat.MessagingStyle.Message(messageBody.getJSONObject("message").getString("text"),
+                        System.currentTimeMillis() - message.getLong("timestamp"), // 6 Mins ago
+                        user.getString("nombre") + " " + user.getString("apellido"))
+                )
+                conversationTitle = "Siempre Contigo"
+            }
+            .show()
+*/
+
     }
 
     companion object {

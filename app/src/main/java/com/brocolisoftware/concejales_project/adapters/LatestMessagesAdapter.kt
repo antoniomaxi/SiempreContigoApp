@@ -1,5 +1,6 @@
 package com.brocolisoftware.concejales_project.adapters
 
+import android.view.View
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.entities.Messages
 import com.brocolisoftware.concejales_project.entities.User
@@ -13,7 +14,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_latest_message.view.*
 
-class LatestMessages(val message: Messages) :  Item(){
+class LatestMessagesAdapter(val message: Messages) :  Item(){
     var partnerUser: User? = null
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         val partnerId : String
@@ -44,7 +45,6 @@ class LatestMessages(val message: Messages) :  Item(){
         })
 
         viewHolder.itemView.latest_messages_message.text = message.text
-
     }
 
     override fun getLayout() = R.layout.item_latest_message

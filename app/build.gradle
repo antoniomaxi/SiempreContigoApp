@@ -78,6 +78,9 @@ dependencies {
     //Facebook
     implementation 'com.facebook.android:facebook-login:[5,6)'
 
+    //Circular ProgressBar
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+
     //Groupie
     implementation "com.xwray:groupie:2.7.0"
     implementation "com.xwray:groupie-kotlin-android-extensions:2.7.0"

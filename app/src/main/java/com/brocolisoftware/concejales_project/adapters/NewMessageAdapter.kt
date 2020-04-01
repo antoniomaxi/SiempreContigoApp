@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.activities.ChatActivity
-import com.brocolisoftware.concejales_project.activities.LatestMessageActivity.Companion.USER_KEY
 import com.brocolisoftware.concejales_project.entities.User
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.squareup.picasso.Picasso
@@ -59,7 +58,7 @@ class NewMessageAdapter (val lista: ArrayList<User>) : RecyclerView.Adapter<NewM
             itemView.setOnClickListener {
 
                 val intent = Intent(itemView.context, ChatActivity::class.java)
-                intent.putExtra(USER_KEY,lista[adapterPosition])
+                intent.putExtra("USER_KEY",lista[adapterPosition])
                 itemView.context.startActivity(intent)
                 (itemView.context as Activity).finish()
             }

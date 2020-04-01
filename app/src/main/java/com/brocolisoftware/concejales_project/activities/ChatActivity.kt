@@ -13,10 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brocolisoftware.concejales_project.R
-import com.brocolisoftware.concejales_project.activities.DashboardActivity.Companion.currentUser
-import com.brocolisoftware.concejales_project.activities.LatestMessageActivity.Companion.USER_KEY
-import com.brocolisoftware.concejales_project.adapters.NewMessageAdapter
-import com.brocolisoftware.concejales_project.adapters.Chat
+import com.brocolisoftware.concejales_project.adapters.ChatAdapter
 import com.brocolisoftware.concejales_project.entities.Messages
 import com.brocolisoftware.concejales_project.entities.User
 import com.google.firebase.auth.FirebaseAuth
@@ -44,7 +41,9 @@ class ChatActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar.setHomeButtonEnabled(true)
-        user = intent.getParcelableExtra<User>(USER_KEY)
+        if(intent == null ) return
+        user = intent?.getParcelableExtra<User>("USER_KEY")!!
+        if(user == null ) return
         supportActionBar?.title = user?.nombre + " " + user?.apellido
 
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
@@ -89,16 +88,16 @@ class ChatActivity : AppCompatActivity() {
                     if (message.fromId == FirebaseAuth.getInstance().currentUser?.uid){
                         var currentUser = DashboardActivity.currentUser
                         if (currentUser != null){
-                            adapter.add(Chat.ChatToItem(message.text, currentUser))
+                            adapter.add(ChatAdapter.ChatToItem(message.text, currentUser))
                         }
                         else{
                             traerCurrentUser()
                             currentUser = DashboardActivity.currentUser ?: return
-                            adapter.add(Chat.ChatToItem(message.text, currentUser))
+                            adapter.add(ChatAdapter.ChatToItem(message.text, currentUser))
                         }
                     }
                     else{
-                        adapter.add(Chat.ChatFromItem(message.text, user))
+                        adapter.add(ChatAdapter.ChatFromItem(message.text, user))
                     }
 
 
@@ -181,6 +180,13 @@ class ChatActivity : AppCompatActivity() {
         val refToLatest = FirebaseDatabase.getInstance().getReference("/ultimosMensajes/$toId").push()
         refToLatest.setValue(message)
 
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        /*val i = Intent(this,LatestMessageActivity::class.java)
+        startActivity(i)*/
+        finish()
     }
 
 }

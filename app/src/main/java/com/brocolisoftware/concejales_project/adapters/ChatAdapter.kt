@@ -8,7 +8,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_messages_from.view.*
 import kotlinx.android.synthetic.main.item_messages_to.view.*
 
-class Chat {
+class ChatAdapter {
 
     class ChatFromItem(val text: String, val user: User) :  Item(){
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
