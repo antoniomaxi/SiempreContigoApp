@@ -9,12 +9,10 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.brocolisoftware.concejales_project.R
-import com.brocolisoftware.concejales_project.activities.LatestMessageActivity
+import com.brocolisoftware.concejales_project.activities.chat.LatestMessageActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import io.karn.notify.Notify
 import org.json.JSONObject
-import java.util.*
 import android.content.Context
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {

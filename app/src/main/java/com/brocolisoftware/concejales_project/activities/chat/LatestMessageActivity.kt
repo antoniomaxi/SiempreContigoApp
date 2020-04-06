@@ -1,4 +1,4 @@
-package com.brocolisoftware.concejales_project.activities
+package com.brocolisoftware.concejales_project.activities.chat
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -77,6 +77,7 @@ class LatestMessageActivity : AppCompatActivity() {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                progressBar.visibility = View.VISIBLE
                 val message = p0.getValue(Messages::class.java)?: return
 
                 val partnerId : String
@@ -90,6 +91,7 @@ class LatestMessageActivity : AppCompatActivity() {
             }
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                progressBar.visibility = View.VISIBLE
                 val message = p0.getValue(Messages::class.java) ?: return
                 val partnerId : String
                 if(message.fromId == FirebaseAuth.getInstance().currentUser?.uid)
@@ -115,15 +117,13 @@ class LatestMessageActivity : AppCompatActivity() {
                     it
                 )
             )
-            if(adapter.itemCount == latestMessagesMap.size ){
-                progressBar.visibility = View.GONE
             }
-        }
+        progressBar.visibility = View.GONE
+
     }
 
     override fun onRestart() {
         super.onRestart()
-        progressBar.visibility = View.VISIBLE
         listenForLatestMessages()
     }
 
@@ -135,7 +135,8 @@ class LatestMessageActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        progressBar.visibility = View.VISIBLE
+        if(progressBar.visibility != View.VISIBLE)
+            progressBar.visibility = View.VISIBLE
         listenForLatestMessages()
     }
 

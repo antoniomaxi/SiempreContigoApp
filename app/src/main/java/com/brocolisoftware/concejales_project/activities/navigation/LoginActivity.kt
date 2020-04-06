@@ -1,4 +1,4 @@
-package com.brocolisoftware.concejales_project.activities
+package com.brocolisoftware.concejales_project.activities.navigation
 
 import android.content.Intent
 import android.os.Bundle

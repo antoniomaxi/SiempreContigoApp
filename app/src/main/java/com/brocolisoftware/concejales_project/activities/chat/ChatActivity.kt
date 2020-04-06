@@ -1,4 +1,4 @@
-package com.brocolisoftware.concejales_project.activities
+package com.brocolisoftware.concejales_project.activities.chat
 
 import android.app.Notification
 import android.content.Context
@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brocolisoftware.concejales_project.R
+import com.brocolisoftware.concejales_project.activities.navigation.DashboardActivity
 import com.brocolisoftware.concejales_project.adapters.ChatAdapter
 import com.brocolisoftware.concejales_project.entities.Messages
 import com.brocolisoftware.concejales_project.entities.User

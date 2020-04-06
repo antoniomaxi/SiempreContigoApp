@@ -1,6 +1,5 @@
-package com.brocolisoftware.concejales_project.activities
+package com.brocolisoftware.concejales_project.activities.chat
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +16,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import dmax.dialog.SpotsDialog
-import kotlinx.android.synthetic.main.activity_new_message.*
 import java.util.ArrayList
 
 class NewMessageActivity : AppCompatActivity() {

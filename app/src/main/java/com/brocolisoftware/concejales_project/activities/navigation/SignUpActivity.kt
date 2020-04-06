@@ -1,4 +1,4 @@
-package com.brocolisoftware.concejales_project.activities
+package com.brocolisoftware.concejales_project.activities.navigation
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -27,8 +27,6 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.io.ByteArrayOutputStream
-import java.lang.Exception
-import java.security.AccessController.getContext
 import java.util.*
 
 

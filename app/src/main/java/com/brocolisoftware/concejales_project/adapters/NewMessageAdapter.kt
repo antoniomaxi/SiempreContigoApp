@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brocolisoftware.concejales_project.R
-import com.brocolisoftware.concejales_project.activities.ChatActivity
+import com.brocolisoftware.concejales_project.activities.chat.ChatActivity
 import com.brocolisoftware.concejales_project.entities.User
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.item_new_message.view.*
 import java.util.*
 
