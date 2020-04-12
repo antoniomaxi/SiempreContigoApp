@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.activities.chat.LatestMessageActivity
+import com.brocolisoftware.concejales_project.activities.news.NewsActivity
 import com.brocolisoftware.concejales_project.entities.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
@@ -79,6 +80,10 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun inicializarListeneres() {
+        News.setOnClickListener {
+            val intent = Intent(this, NewsActivity::class.java)
+            startActivity(intent)
+        }
         Emergencia.setOnClickListener {
             val intent = Intent(this, LatestMessageActivity::class.java)
             startActivity(intent)

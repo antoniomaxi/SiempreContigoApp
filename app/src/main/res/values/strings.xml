@@ -14,4 +14,9 @@
     <string name="new_message">Nuevo Mensaje</string>
     <string name="username">"Usuario "</string>
     <string name="default_notification_channel_id">1</string>
+    <string name="title_activity_news">NewsActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
 </resources>
