@@ -6,8 +6,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -31,199 +30,251 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5"></LinearLayout>
+                android:layout_weight="0.5"/>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:hint="@string/Nombre"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
+                android:layout_marginRight="20dp"
+                app:endIconMode="clear_text"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/Nombre"
-                    android:id="@+id/Nombre"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:inputType="text"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <LinearLayout
+                    android:id="@+id/Nombre"
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField2"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
+                android:layout_height="wrap_content"
+                android:hint="@string/Apellido"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
+                android:layout_marginRight="20dp"
+                app:endIconMode="clear_text"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/Apellido"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:inputType="text"
                     android:id="@+id/Apellido"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <LinearLayout
+                    app:endIconMode="clear_text"
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField3"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
+                android:layout_height="wrap_content"
+                android:hint="@string/Cedula"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
+                android:layout_marginRight="20dp"
+                app:endIconMode="clear_text"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/Cedula"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:inputType="number"
                     android:id="@+id/Cedula"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <LinearLayout
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField4"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
+                android:layout_height="wrap_content"
+                android:hint="@string/telefono"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
+                android:layout_marginRight="20dp"
+                app:endIconMode="clear_text"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/telefono"
-                    android:id="@+id/Phone"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:inputType="number"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <LinearLayout
+                    android:id="@+id/Phone"
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField5"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
+                android:layout_height="wrap_content"
+                android:hint="@string/Direccion"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
+                android:layout_marginRight="20dp"
+                app:endIconMode="clear_text"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/Direccion"
-                    android:id="@+id/Direccion"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:inputType="text"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <LinearLayout
+                    android:id="@+id/Direccion"
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField6"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
+                android:layout_height="wrap_content"
+                android:hint="@string/Email"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
+                android:layout_marginRight="20dp"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/Email"
-                    android:id="@+id/Email"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:inputType="textEmailAddress"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <LinearLayout
+                    android:id="@+id/Email"
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField7"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
+                android:layout_marginRight="20dp"
+                app:endIconMode="password_toggle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/password"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
                     android:id="@+id/Password1"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:inputType="textPassword"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <LinearLayout
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField8"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/password2"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:endIconMode="password_toggle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:id="@+id/Password2"
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@drawable/background_textviews_login"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/password2"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:inputType="textPassword"
-                    android:background="@null"
-                    android:backgroundTint="#000"
-                    android:id="@+id/Password2"
-                    android:textCursorDrawable="@null"/>
-        </LinearLayout>
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="25dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:id="@+id/btn_sign_up"
-                android:background="@drawable/background_button_login"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:textSize="16dp"
+                android:id="@+id/btn_sign_up"
                 android:text="@string/Sign_Up"
                 android:textColor="#fff"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="19dp"
+                android:gravity="center"
+                android:background="@android:color/darker_gray"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="1"
+                android:gravity="center_horizontal"
+                >
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center_vertical"
+                    android:textSize="16dp"
+                    android:background="@null"
+                    android:layout_weight="0.54"
+                    android:text="¿Ya tienes cuenta? "/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textSize="16dp"
+                    android:background="@null"
+                    android:textColor="#0B2161"
+                    android:layout_weight="0.4"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:id="@+id/go_Login"
+                    android:text="Inicia sesión."/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

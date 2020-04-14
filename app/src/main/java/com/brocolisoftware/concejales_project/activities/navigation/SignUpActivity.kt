@@ -60,9 +60,9 @@ class SignUpActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if(mAuth.currentUser != null){
+        /*if(mAuth.currentUser != null){
 
-        }
+        }*/
     }
 
     private fun registerUser(){
@@ -130,7 +130,7 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
 
-        val dialog: android.app.AlertDialog? = SpotsDialog.Builder()
+        val dialog: AlertDialog? = SpotsDialog.Builder()
             .setContext(this)
             .setCancelable(false)
             .setTheme(R.style.CustomAlert)
@@ -182,6 +182,10 @@ class SignUpActivity : AppCompatActivity() {
 
         btn_select_photo.setOnClickListener {
             seleccionarFoto()
+        }
+
+        go_Login.setOnClickListener {
+            finish()
         }
     }
 

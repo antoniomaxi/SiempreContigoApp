@@ -8,7 +8,7 @@
     <string name="telefono">Telefono</string>
     <string name="Direccion">Dirección</string>
     <string name="Edad">Edad</string>
-    <string name="password2">Repita su Contraseña</string>
+    <string name="password2">Confirme su Contraseña</string>
     <string name="Login">Iniciar Sesión</string>
     <string name="Sign_Up">Registrate</string>
     <string name="new_message">Nuevo Mensaje</string>

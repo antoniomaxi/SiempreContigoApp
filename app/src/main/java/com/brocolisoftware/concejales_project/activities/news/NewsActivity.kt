@@ -4,50 +4,62 @@ import android.os.Bundle
 import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.brocolisoftware.concejales_project.R
+import com.brocolisoftware.concejales_project.fragments.HomeFragment
+import com.brocolisoftware.concejales_project.fragments.LikesFragment
+import com.brocolisoftware.concejales_project.fragments.NotificationFragment
+import com.brocolisoftware.concejales_project.fragments.ProfileFragment
 
 class NewsActivity : AppCompatActivity() {
-
-    private lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        textView =findViewById(R.id.message)
+
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        moveToFragment(HomeFragment())
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_home -> {
-                textView.text = "Home"
+                moveToFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_notifications -> {
-                textView.text = "Notifications"
+                moveToFragment(NotificationFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_add_post -> {
                 item.isChecked = false
-                textView.text = "Add Post"
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_likes -> {
-                textView.text = "likes"
+                moveToFragment(LikesFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_profile -> {
-                textView.text = "Profile"
+                moveToFragment(ProfileFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }
 
         false
     }
+
+    private fun moveToFragment(fragment: Fragment){
+        val fragmentTrans = supportFragmentManager.beginTransaction().replace(
+            R.id.frame_container, fragment!!
+        ).commit()
+    }
+
 }
