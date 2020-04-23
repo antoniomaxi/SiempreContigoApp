@@ -9,14 +9,16 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
-            android:name="androidx.multidex.MultiDexApplication"
+            android:name=".SiempreContigo"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="Siempre Contigo"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".activities.news.AccountSettingsActivity"/>
+        <activity android:name=".activities.complaints.ConcejalComplaintActivity"/>
+        <activity android:name=".activities.complaints.UserComplaintActivity" />
+        <activity android:name=".activities.news.AccountSettingsActivity" />
         <activity
                 android:name=".activities.news.NewsActivity"
                 android:label="@string/title_activity_news" />

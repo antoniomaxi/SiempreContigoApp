@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,6 +20,7 @@ import com.brocolisoftware.concejales_project.entities.Messages
 import com.brocolisoftware.concejales_project.entities.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
@@ -30,11 +32,15 @@ class ChatActivity : AppCompatActivity() {
     lateinit var user : User
     val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var Notification : Notification
+    lateinit var progressBar : CircularProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         recyclerView = findViewById<RecyclerView>(R.id.recyclerview_chat)
+
+        progressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
+        progressBar.visibility = View.VISIBLE
 
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -52,22 +58,28 @@ class ChatActivity : AppCompatActivity() {
 
         listenForMessages()
 
+        inicializarListener()
+    }
+
+    private fun inicializarListener() {
         send_button.setOnClickListener {
             val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                v.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+                v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
             } else {
-                v.vibrate(200)
+                v.vibrate(50)
             }
             sendMessages()
         }
     }
 
     private fun listenForMessages() {
+
         val fromId = FirebaseAuth.getInstance().currentUser?.uid
         val toId = user.uid
         val ref = FirebaseDatabase.getInstance().getReference("/Mensajes/$fromId/$toId")
+
 
         ref.addChildEventListener(object: ChildEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -83,6 +95,7 @@ class ChatActivity : AppCompatActivity() {
             }
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                progressBar.visibility = View.VISIBLE
                 val message = p0.getValue(Messages::class.java)
                 if(message != null) {
 
@@ -101,12 +114,10 @@ class ChatActivity : AppCompatActivity() {
                         adapter.add(ChatAdapter.ChatFromItem(message.text, user))
                     }
 
-
-
                 }
 
                 recyclerView.scrollToPosition(adapter.itemCount - 1)
-
+                progressBar.visibility = View.GONE
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {
@@ -114,6 +125,8 @@ class ChatActivity : AppCompatActivity() {
             }
 
         })
+        progressBar.visibility = View.GONE
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -145,13 +158,17 @@ class ChatActivity : AppCompatActivity() {
 
     private fun sendMessages() {
         val text = et_message.text.toString()
+
         val fromId = FirebaseAuth.getInstance().currentUser?.uid
         val toId = user.uid
         //val ref = FirebaseDatabase.getInstance().getReference("/Mensajes").push()
-        val ref = FirebaseDatabase.getInstance().getReference("/Mensajes/$fromId/$toId").push()
-        val toRef = FirebaseDatabase.getInstance().getReference("/Mensajes/$toId/$fromId").push()
 
-        if(fromId == null ) return
+        if(fromId == null || text.isEmpty()) return
+        val ref = FirebaseDatabase.getInstance().getReference("/Mensajes/$fromId/$toId").push()
+        ref.keepSynced(true)
+        val toRef = FirebaseDatabase.getInstance().getReference("/Mensajes/$toId/$fromId").push()
+        toRef.keepSynced(true)
+        et_message.text.clear()
         val message = Messages(ref.key!!,text,fromId,toId,System.currentTimeMillis()/1000)
         ref.setValue(message).addOnSuccessListener {
 
@@ -161,9 +178,6 @@ class ChatActivity : AppCompatActivity() {
             FirebaseDatabase.getInstance().getReference("/Notifications/$toId")
                 .push().setValue(message).addOnSuccessListener {
                 }
-
-
-            et_message.text.clear()
             toRef.setValue(message)
 
         }.addOnFailureListener {
@@ -187,6 +201,7 @@ class ChatActivity : AppCompatActivity() {
         super.onRestart()
         /*val i = Intent(this,LatestMessageActivity::class.java)
         startActivity(i)*/
+        //progressBar.visibility = View.VISIBLE
         finish()
     }
 

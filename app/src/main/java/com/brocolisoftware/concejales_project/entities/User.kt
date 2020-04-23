@@ -13,8 +13,10 @@ class User(var uid: String,
            var cedula: String,
            var Admin: Boolean = false,
            var foto: String,
-           var device_id : String) : Parcelable {
+           var device_id : String,
+           var bio : String,
+           var Concejal : Boolean) : Parcelable {
 
-    constructor() : this("","","","","","","",false,"", "")
+    constructor() : this("","","","","","","",false,"", "","",false)
 
 }

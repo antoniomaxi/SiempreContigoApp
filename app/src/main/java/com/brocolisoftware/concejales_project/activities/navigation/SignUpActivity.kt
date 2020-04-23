@@ -251,7 +251,9 @@ class SignUpActivity : AppCompatActivity() {
             ed_Cedula.text.toString().trim(),
             false,
             photoUrl,
-            deviceToken
+            deviceToken,
+            "Biografia...",
+            false
         )
 
         database = FirebaseDatabase.getInstance().getReference("/Usuarios/$uid")

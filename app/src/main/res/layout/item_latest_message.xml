@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         xmlns:app="http://schemas.android.com/tools"
         android:id="@+id/item_planning_customer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        card_view:cardCornerRadius="3dp"
+        android:background="@drawable/background_latest"
         app:ignore="NamespaceTypo">
 
     <LinearLayout
@@ -65,11 +63,5 @@
 
 
     </LinearLayout>
-
-
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E0E0E0"/>
 
 </androidx.cardview.widget.CardView>

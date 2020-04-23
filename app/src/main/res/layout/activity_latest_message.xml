@@ -3,8 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:card_view="http://schemas.android.com/tools">
+        android:layout_height="match_parent">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -16,25 +15,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:elevation="4dp"
-                app:navigationIcon="@drawable/ic_arrow_back" />
+                app:navigationIcon="@drawable/ic_arrow_back">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="wrap_content"
+                        android:id="@+id/deleteButton"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="20dp"
+                        android:visibility="invisible"
+                        android:background="@color/fui_transparent"
+                        android:src="@drawable/ic_delete_24px"/>
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/recyclerview_latest_message"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="5dp">
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
                 android:id="@+id/circularProgressBar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:cpb_background_progressbar_color="#b6bbd8"
-                app:cpb_background_progressbar_width="5dp"
-                app:cpb_progressbar_color="#3f51b5"
-                app:cpb_progressbar_width="6dp"
+                app:cpb_background_progressbar_width="1dp"
+                app:cpb_progressbar_color="@color/colorPrimary"
+                app:cpb_progressbar_width="2dp"
+                app:cpb_progress_direction="to_right"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"

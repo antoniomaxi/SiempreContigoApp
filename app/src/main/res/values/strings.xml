@@ -18,5 +18,16 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="Denuncia">Denunciar</string>
+    <string name="Denuncia2">Escribe tu denuncia aquí</string>
+    <string name="Evidencias">Adjunte Evidencias (Opcional)</string>
+    <string name="inicia_sesion">Inicia sesión.</string>
+    <string name="escribe_un_mensaje">Escribe un mensaje</string>
+    <string name="noticias">NOTICIAS</string>
+    <string name="emergencia">EMERGENCIA</string>
+    <string name="denuncias">DENUNCIAS</string>
+    <string name="salir">SALIR</string>
+    <string name="cambia_tu_imagen">Cambia tu imagen</string>
+    <string name="biografia">Biografia</string>
 
 </resources>

@@ -3,9 +3,11 @@ package com.brocolisoftware.concejales_project.activities.navigation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.brocolisoftware.concejales_project.R
 import com.brocolisoftware.concejales_project.activities.chat.LatestMessageActivity
+import com.brocolisoftware.concejales_project.activities.complaints.UserComplaintActivity
 import com.brocolisoftware.concejales_project.activities.news.NewsActivity
 import com.brocolisoftware.concejales_project.entities.User
 import com.google.android.gms.tasks.OnCompleteListener
@@ -15,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.iid.FirebaseInstanceId
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class DashboardActivity : AppCompatActivity() {
@@ -23,15 +26,18 @@ class DashboardActivity : AppCompatActivity() {
         var currentUser: User? = null
     }
 
+    lateinit var progressBar : CircularProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
+        progressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
+        progressBar.visibility = View.VISIBLE
+
         verificarLogeo()
 
         traerCurrentUser()
-
-        inicializarListeneres()
     }
 
      private fun traerCurrentUser() {
@@ -45,7 +51,6 @@ class DashboardActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                  currentUser = p0.getValue(User::class.java)
-
             }
 
         })
@@ -69,7 +74,10 @@ class DashboardActivity : AppCompatActivity() {
 
                     FirebaseDatabase.getInstance().getReference("/Usuarios/$uid/device_id")
                         .setValue(token).addOnSuccessListener {
+                            progressBar.visibility = View.GONE
+                            antispam.visibility = View.GONE
                             Toast.makeText(baseContext, "Bienvenido", Toast.LENGTH_SHORT).show()
+                            inicializarListeneres()
                         }
 
                 })
@@ -88,6 +96,14 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this, LatestMessageActivity::class.java)
             startActivity(intent)
 
+        }
+        Denuncia.setOnClickListener {
+            val intent : Intent = if(currentUser!!.Concejal)
+                Intent(this, UserComplaintActivity::class.java)
+            else
+                Intent(this, UserComplaintActivity::class.java)
+
+            startActivity(intent)
         }
         Logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

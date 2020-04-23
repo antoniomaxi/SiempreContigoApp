@@ -1,9 +1,11 @@
 package com.brocolisoftware.concejales_project.activities.news
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,6 +22,12 @@ class NewsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar!!)
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar.setHomeButtonEnabled(true)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
@@ -60,6 +68,16 @@ class NewsActivity : AppCompatActivity() {
         val fragmentTrans = supportFragmentManager.beginTransaction().replace(
             R.id.frame_container, fragment!!
         ).commit()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                finish()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
